@@ -1,11 +1,12 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update]
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
     def index
         @articles = Article.all
     end
 
-    def show   
+    def show
     end
 
     def new
@@ -18,11 +19,11 @@ class ArticlesController < ApplicationController
             redirect_to article_path(@article), notice: '保存できたよ'
         else
             flash.now[:error] = '保存に失敗しました'
-            render :new 
+            render :new
         end
     end
 
-    def edit  
+    def edit
     end
 
     def update
@@ -48,5 +49,5 @@ class ArticlesController < ApplicationController
     def set_article
         @article = Article.find(params[:id])
     end
-    
+
 end
