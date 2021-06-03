@@ -29,10 +29,21 @@ class User < ApplicationRecord
     articles.exists?(id: article.id)
   end
 
-  # shuzo0414@gmail.com
   def display_name
-    self.email.split('@').first
-      # => ['shuzo0414', 'gmail.com']
+    # if profile && profile.nickname
+    #   profile.nickname
+    # else
+    #   self.email.split('@').first
+    # end
+    profile&.nickname || self.email.split('@').first
+  end
+
+  def birthday
+    profile&.birthday
+  end
+
+  def gender
+    profile&.gender
   end
 
   def prepare_profile
