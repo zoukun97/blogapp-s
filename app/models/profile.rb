@@ -18,7 +18,7 @@
 #
 class Profile < ApplicationRecord
     enum gender: {male: 0, female: 1, other: 2}
-    bolongs_to :user
+    belongs_to :user
 
     def age
         return '不明' unless birthday.present?
